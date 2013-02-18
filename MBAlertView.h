@@ -8,6 +8,36 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MBAlertView : UIView
+typedef NS_ENUM(NSInteger, MBAlertStyle) {
+    MBAlertStyleRegular
+};
 
+@interface MBAlertView : UIView
+@property (copy, nonatomic) NSString *title;
+@property (copy, nonatomic) NSString *message;
+
+@property (assign, nonatomic) MBAlertStyle alertStyle;
+
+@property (assign, nonatomic) NSInteger cancelButtonIndex;
+@property (assign, nonatomic) NSInteger destructiveButtonIndex;
+
+// appearance
+
+@property (strong, nonatomic) UIFont *titleFont;
+@property (strong, nonatomic) UIFont *messageFont;
+@property (strong, nonatomic) UIFont *buttonFont;
+
+
+// views
+
+@property (readonly, nonatomic) UITextField *textField0;
+@property (readonly, nonatomic) UITextField *textField1;
+
+
+
+- (NSInteger)addButtonWithTitle:(NSString *)title action:(void (^)(void))actionBlock;
+
+- (id)initWithTitle:(NSString *)title message:(NSString *)message;
+- (void)show;
+- (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated;
 @end

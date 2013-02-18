@@ -22,6 +22,7 @@
 		3914973C16D2429C00864DF1 /* MBActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3914973B16D2429C00864DF1 /* MBActionSheetViewController.m */; };
 		3914974816D243CB00864DF1 /* MBActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3914974716D243CB00864DF1 /* MBActionSheet.m */; };
 		3914974B16D243D700864DF1 /* MBAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3914974A16D243D700864DF1 /* MBAlertView.m */; };
+		39E0675516D24D6200A3A329 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39E0675416D24D6200A3A329 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		3914974716D243CB00864DF1 /* MBActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBActionSheet.m; sourceTree = SOURCE_ROOT; };
 		3914974916D243D700864DF1 /* MBAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBAlertView.h; sourceTree = SOURCE_ROOT; };
 		3914974A16D243D700864DF1 /* MBAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBAlertView.m; sourceTree = SOURCE_ROOT; };
+		39E0675416D24D6200A3A329 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39E0675516D24D6200A3A329 /* QuartzCore.framework in Frameworks */,
 				3914971516D23F3800864DF1 /* UIKit.framework in Frameworks */,
 				3914971716D23F3800864DF1 /* Foundation.framework in Frameworks */,
 				3914971916D23F3800864DF1 /* CoreGraphics.framework in Frameworks */,
@@ -88,6 +91,7 @@
 		3914971316D23F3800864DF1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				39E0675416D24D6200A3A329 /* QuartzCore.framework */,
 				3914971416D23F3800864DF1 /* UIKit.framework */,
 				3914971616D23F3800864DF1 /* Foundation.framework */,
 				3914971816D23F3800864DF1 /* CoreGraphics.framework */,

@@ -7,25 +7,149 @@
 //
 
 #import "MBAlertView.h"
+#import <QuartzCore/QuartzCore.h>
+
+NSString * const MBAnimationType = @"MBAnimationType";
+NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
+
+@interface MBAlertButton : NSObject
+@property (strong, nonatomic) UIButton *button;
+@property (strong, nonatomic) NSString *buttonTitle;
+@property (copy, nonatomic) void (^actionBlock)(void);
+@property (copy, nonatomic) BOOL (^enableButtonBlock)(void);
+@end
+
+@implementation MBAlertButton
+@end
+
+
+
+@interface MBAlertView ()
+
+@property (strong, nonatomic) UIView *alertView;
+
+@property (strong, nonatomic) NSMutableArray *buttons;
+@property (strong, nonatomic) MBAlertButton *cancelButton;
+@property (strong, nonatomic) MBAlertButton *destructiveButton;
+@end
 
 @implementation MBAlertView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
+- (id)initWithFrame:(CGRect)frame {
+    return [self init];
+}
+
+- (id)init {
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    NSCParameterAssert(window);
+    self = [super initWithFrame:window.bounds];
     if (self) {
-        // Initialization code
+        self.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        self.backgroundColor = [UIColor clearColor];
+        self.layer.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.0].CGColor;
+        
+        _cancelButtonIndex = -1;                // = last button
+        _destructiveButtonIndex = NSNotFound;   // = no button
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+- (id)initWithTitle:(NSString *)title message:(NSString *)message {
+    if (self) {
+        _title = [title copy];
+        _message = [message copy];
+    }
+    return self;
 }
-*/
+
+- (NSInteger)addButtonWithTitle:(NSString *)title action:(void (^)(void))actionBlock {
+    return 0;
+}
+
+- (void)show {
+    UIWindow *window = [[UIApplication sharedApplication] keyWindow];
+    NSCParameterAssert(window);
+    [window addSubview:self];
+    
+    CGFloat windowHeight = window.bounds.size.height;
+    CGFloat windowWidth = window.bounds.size.width;
+    
+    CGFloat alertWidth = 280.0f;
+    CGFloat alertHeight = 200.0f;
+    
+    _alertView = [[UIView alloc] initWithFrame:CGRectMake(windowWidth/2 - alertWidth/2, windowHeight/2 - alertHeight/2, alertWidth, alertHeight)];
+    _alertView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
+    _alertView.layer.shadowColor = [UIColor blackColor].CGColor;
+    _alertView.layer.shadowOpacity = 0.7;
+    _alertView.layer.shadowOffset = CGSizeMake(0, 3);
+
+    [self addSubview:_alertView];
+    
+    UIImage *background = [[UIImage imageNamed:@"alert-window"] resizableImageWithCapInsets:UIEdgeInsetsMake(38, 0, 12, 0)];
+    if (background) {
+        UIImageView *imageView = [[UIImageView alloc] initWithImage:background];
+        imageView.frame = _alertView.bounds;
+        imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+        [_alertView addSubview:imageView];
+    }
+    else {
+        _alertView.backgroundColor = [UIColor colorWithRed:45/255.0f green:59/255.0f blue:99/255.0f alpha:0.9];
+        _alertView.layer.cornerRadius = 10.0f;
+        _alertView.layer.borderColor = [[UIColor whiteColor] colorWithAlphaComponent:0.5].CGColor;
+        _alertView.layer.borderWidth = 2.0f;
+    }
+
+    
+    
+    CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+    scaleAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(0, 0, 0)];
+    scaleAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1, 1, 1)];
+    [self.alertView.layer addAnimation:scaleAnimation forKey:@"scale"];
+    
+    CABasicAnimation *backgroundColor = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
+    backgroundColor.fromValue = (__bridge id)([[UIColor blackColor] colorWithAlphaComponent:0.0].CGColor);
+    backgroundColor.toValue = (__bridge id)([[UIColor blackColor] colorWithAlphaComponent:0.5].CGColor);
+    self.layer.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5].CGColor;
+    [self.layer addAnimation:backgroundColor forKey:@"color"];    
+}
+
+- (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
+    [self dismissView:animated];
+}
+
+#pragma mark - IBAction
+
+- (IBAction)alertButtonPressed:(UIButton *)sender {
+    
+}
+
+- (void)dismissView:(BOOL)animated {
+    if (animated) {
+        CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
+        scaleAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1, 1, 1)];
+        scaleAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(0, 0, 0)];
+        scaleAnimation.delegate = self;
+        [scaleAnimation setValue:MBAlertViewAnimationDismiss forKey:MBAnimationType];
+        [self.alertView.layer addAnimation:scaleAnimation forKey:@"scale"];
+        self.alertView.layer.transform = CATransform3DMakeScale(0, 0, 0);
+        
+        CABasicAnimation *backgroundColor = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
+        backgroundColor.fromValue = (__bridge id)([[UIColor blackColor] colorWithAlphaComponent:0.5].CGColor);
+        backgroundColor.toValue = (__bridge id)([[UIColor blackColor] colorWithAlphaComponent:0.0].CGColor);
+        self.layer.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.0].CGColor;
+        [self.layer addAnimation:backgroundColor forKey:@"color"];
+    }
+    else {
+        [self removeFromSuperview];
+    }
+}
+
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag {
+    NSString *type = [anim valueForKey:MBAnimationType];
+    if ([type isEqualToString:MBAlertViewAnimationDismiss]) {
+        // animation did dismiss alert
+        [self removeFromSuperview];
+    }
+}
 
 @end
