@@ -289,7 +289,24 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
 #pragma mark - IBAction
 
 - (IBAction)alertButtonPressed:(UIButton *)sender {
+    MBAlertButton *alertButton = [self alertButtonForUIButton:sender];
+    if (alertButton.actionBlock) {
+        alertButton.actionBlock();
+    }
     [self dismissView:YES];
+}
+
+- (MBAlertButton *)alertButtonForUIButton:(UIButton *)button {
+    NSIndexSet *indexes = [self.buttons indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        MBAlertButton *alertButton = obj;
+        if (alertButton.button == button) {
+            *stop = YES;
+            return YES;
+        }
+        return NO;
+    }];
+    NSArray *objects = [self.buttons objectsAtIndexes:indexes];
+    return [objects lastObject];
 }
 
 - (void)dismissView:(BOOL)animated {
