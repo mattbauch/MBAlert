@@ -227,13 +227,27 @@ NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
         CGRect textField0Frame = CGRectMake(edgeInset, textFieldRect.origin.y, usableAlertWidth, 30.0f);
         _textField0.frame = textField0Frame;
         [_alertView addSubview:_textField0];
+        
         if (self.alertStyle == MBAlertViewStyleLoginAndPasswordInput) {
             CGRect textField1Frame = CGRectMake(edgeInset, textFieldRect.origin.y + 30 + edgeInset/2, usableAlertWidth, 30.0f);
             _textField1.frame = textField1Frame;
             [_alertView addSubview:_textField1];
+
+            _textField1.secureTextEntry = YES;
+            _textField0.placeholder = @"Login";
+            _textField1.placeholder = @"Password";
         }
         else {
             [_textField1 removeFromSuperview];
+            _textField0.placeholder = nil;
+            _textField1.placeholder = nil;
+        }
+
+        if (self.alertStyle == MBAlertViewStyleSecureTextInput) {
+            _textField0.secureTextEntry = YES;
+        }
+        else {
+            _textField0.secureTextEntry = NO;
         }
     }
     else {
