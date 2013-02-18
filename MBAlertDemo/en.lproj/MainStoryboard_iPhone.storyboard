@@ -148,6 +148,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="uiButtonPressed:" destination="gYP-61-qf2" eventType="touchUpInside" id="7pP-iw-fM3"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="h9t-O9-h1S">
                                 <rect key="frame" x="164" y="46" width="146" height="44"/>
@@ -160,6 +163,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="mbButtonPressed:" destination="gYP-61-qf2" eventType="touchUpInside" id="u12-6J-Mhn"/>
+                                </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="UIAlertView" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="xra-B1-PNf">
                                 <rect key="frame" x="10" y="10" width="146" height="21"/>
@@ -184,6 +190,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="uiButtonPressed:" destination="gYP-61-qf2" eventType="touchUpInside" id="EMK-ze-2mw"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GXp-ZQ-gfP">
                                 <rect key="frame" x="10" y="148" width="146" height="44"/>
@@ -196,6 +205,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="uiButtonPressed:" destination="gYP-61-qf2" eventType="touchUpInside" id="mHa-Sl-MQw"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="I5f-cx-zgq">
                                 <rect key="frame" x="10" y="199" width="146" height="44"/>
@@ -208,6 +220,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="uiButtonPressed:" destination="gYP-61-qf2" eventType="touchUpInside" id="uP9-C6-DI7"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="h5k-Vd-cKa">
                                 <rect key="frame" x="164" y="97" width="146" height="44"/>
@@ -220,6 +235,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="mbButtonPressed:" destination="gYP-61-qf2" eventType="touchUpInside" id="KF0-95-tvN"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="7x1-h7-pBi">
                                 <rect key="frame" x="164" y="148" width="146" height="44"/>
@@ -232,6 +250,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="mbButtonPressed:" destination="gYP-61-qf2" eventType="touchUpInside" id="Ikn-Ig-k5n"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="f9E-fO-Jek">
                                 <rect key="frame" x="164" y="199" width="146" height="44"/>
@@ -244,11 +265,24 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="mbButtonPressed:" destination="gYP-61-qf2" eventType="touchUpInside" id="5g1-XZ-mfZ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Alert" id="Bq6-Na-2zI"/>
+                    <connections>
+                        <outlet property="mbAlert1Button" destination="h5k-Vd-cKa" id="58j-XX-Ats"/>
+                        <outlet property="mbAlert2Button" destination="7x1-h7-pBi" id="La6-Bb-6D5"/>
+                        <outlet property="mbAlert3Button" destination="f9E-fO-Jek" id="Sxd-KN-xhs"/>
+                        <outlet property="mbAlertNoButton" destination="h9t-O9-h1S" id="Q3e-yN-bBt"/>
+                        <outlet property="uiAlert1Button" destination="wiS-pU-lt0" id="2kn-Ex-UPR"/>
+                        <outlet property="uiAlert2Button" destination="GXp-ZQ-gfP" id="kNJ-Se-49c"/>
+                        <outlet property="uiAlert3Button" destination="I5f-cx-zgq" id="1or-7S-pod"/>
+                        <outlet property="uiAlertNoButton" destination="IF9-IW-Ne8" id="gBL-8k-3de"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vzm-ue-JII" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -277,6 +311,21 @@
     <classes>
         <class className="MBActionSheetViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MBActionSheetViewController.h"/>
+        </class>
+        <class className="MBAlertViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MBAlertViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="mbButtonPressed:" candidateClass="UIButton"/>
+                <relationship kind="action" name="uiButtonPressed:" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="mbAlert1Button" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="mbAlert2Button" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="mbAlert3Button" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="mbAlertNoButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="uiAlert1Button" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="uiAlert2Button" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="uiAlert3Button" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="uiAlertNoButton" candidateClass="UIButton"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
