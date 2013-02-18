@@ -20,6 +20,7 @@
 		3914973116D23F3800864DF1 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3914972F16D23F3800864DF1 /* MainStoryboard_iPad.storyboard */; };
 		3914973416D23F3800864DF1 /* MBAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3914973316D23F3800864DF1 /* MBAlertViewController.m */; };
 		3914973C16D2429C00864DF1 /* MBActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3914973B16D2429C00864DF1 /* MBActionSheetViewController.m */; };
+		3914974816D243CB00864DF1 /* MBActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3914974716D243CB00864DF1 /* MBActionSheet.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,8 @@
 		3914973316D23F3800864DF1 /* MBAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBAlertViewController.m; sourceTree = "<group>"; };
 		3914973A16D2429C00864DF1 /* MBActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBActionSheetViewController.h; sourceTree = "<group>"; };
 		3914973B16D2429C00864DF1 /* MBActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBActionSheetViewController.m; sourceTree = "<group>"; };
+		3914974616D243CB00864DF1 /* MBActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBActionSheet.h; sourceTree = SOURCE_ROOT; };
+		3914974716D243CB00864DF1 /* MBActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBActionSheet.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +64,8 @@
 		3914970816D23F3800864DF1 = {
 			isa = PBXGroup;
 			children = (
+				3914974616D243CB00864DF1 /* MBActionSheet.h */,
+				3914974716D243CB00864DF1 /* MBActionSheet.m */,
 				3914971A16D23F3800864DF1 /* MBAlertDemo */,
 				3914971316D23F3800864DF1 /* Frameworks */,
 				3914971216D23F3800864DF1 /* Products */,
@@ -187,6 +192,7 @@
 				3914972516D23F3800864DF1 /* MBAppDelegate.m in Sources */,
 				3914973416D23F3800864DF1 /* MBAlertViewController.m in Sources */,
 				3914973C16D2429C00864DF1 /* MBActionSheetViewController.m in Sources */,
+				3914974816D243CB00864DF1 /* MBActionSheet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
