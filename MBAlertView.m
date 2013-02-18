@@ -9,6 +9,11 @@
 #import "MBAlertView.h"
 #import <QuartzCore/QuartzCore.h>
 
+#if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_5_0
+#error This project uses code that is only available in iOS 5 or later
+// e.g. UIKeyboardWillChangeFrameNotification
+#endif
+
 NSString * const MBAnimationType = @"MBAnimationType";
 NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
 
@@ -38,7 +43,9 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
 @property (strong, nonatomic) MBAlertButton *destructiveButton;
 @end
 
-@implementation MBAlertView
+@implementation MBAlertView {
+    CGRect _originalAlertFrame;
+}
 
 - (id)initWithFrame:(CGRect)frame {
     return [self init];
@@ -94,7 +101,7 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
     UIWindow *window = [[UIApplication sharedApplication] keyWindow];
     NSCParameterAssert(window);
     [window addSubview:self];
-    
+        
     UIImage *regularButtonBackgroundNormal = [[UIImage imageNamed:@"alertRegularButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 18, 0, 18)];
     UIImage *regularButtonBackgroundPressed = [[UIImage imageNamed:@"alertRegularButtonPressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 18, 0, 18)];;
     UIImage *cancelButtonBackgroundNormal = [[UIImage imageNamed:@"alertCancelButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 18, 0, 18)];
@@ -313,6 +320,11 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
         button.frame = buttonFrame;
     }
     
+    
+    _originalAlertFrame = _alertView.frame;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameDidChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
+
+    
     CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
     scaleAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(0, 0, 0)];
     scaleAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1, 1, 1)];
@@ -353,6 +365,10 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
 }
 
 - (void)dismissView:(BOOL)animated {
+    [self.textField0 resignFirstResponder];
+    [self.textField1 resignFirstResponder];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillChangeFrameNotification object:nil];
+
     if (animated) {
         CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
         scaleAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1, 1, 1)];
@@ -380,5 +396,53 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
         [self removeFromSuperview];
     }
 }
+
+
+- (void)keyboardFrameDidChange:(NSNotification *)notification {
+    NSDictionary *userInfo = notification.userInfo;
+    NSTimeInterval duration = [[userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    UIViewAnimationCurve curve = [[userInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    CGRect keyboardEndFrame = [[userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    keyboardEndFrame = [self convertRect:keyboardEndFrame fromView:self.window];
+    
+    UIViewAnimationOptions options = 0;
+    switch (curve) {
+        case UIViewAnimationCurveEaseInOut:
+            options |= UIViewAnimationOptionCurveEaseInOut;
+            break;
+        case UIViewAnimationCurveEaseIn:
+            options |= UIViewAnimationOptionCurveEaseIn;
+            break;
+        case UIViewAnimationCurveEaseOut:
+            options |= UIViewAnimationOptionCurveEaseOut;
+            break;
+        case UIViewAnimationCurveLinear:
+            options |= UIViewAnimationOptionCurveLinear;
+            break;
+    }
+    
+    [UIView animateWithDuration:duration delay:0.0 options:options animations:^{
+        BOOL showKeyboard = YES;
+        CGRect frame = self.alertView.frame;
+        if (!CGRectIntersectsRect(keyboardEndFrame, self.frame)) {
+            showKeyboard = NO;
+        }
+        
+        if (showKeyboard) {
+            CGFloat newHeight = MIN(self.frame.size.height - keyboardEndFrame.size.height, _originalAlertFrame.size.height);
+            CGFloat newY = MAX(0, self.frame.size.height - keyboardEndFrame.size.height - newHeight - 10.0f);
+            frame = CGRectMake(frame.origin.x, newY, frame.size.width, newHeight);
+        }
+        else {
+            frame = _originalAlertFrame;
+        }
+        self.alertView.frame = frame;
+    } completion:^(BOOL finished) {
+        if (CGRectIntersectsRect(keyboardEndFrame, self.frame) && finished) {
+            [self.textScrollView flashScrollIndicators];
+        }
+    }];
+}
+
 
 @end
