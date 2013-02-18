@@ -129,11 +129,10 @@
             </objects>
             <point key="canvasLocation" x="322" y="258"/>
         </scene>
-        <!--View Controller - Alert-->
+        <!--Alert View Controller - Alert-->
         <scene sceneID="c9W-uw-APK">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vzm-ue-JII" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="gYP-61-qf2" customClass="MBViewController" sceneMemberID="viewController">
+                <viewController id="gYP-61-qf2" customClass="MBAlertViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TOy-3q-Pb4">
                         <rect key="frame" x="0.0" y="20" width="320" height="499"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -251,6 +250,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Alert" id="Bq6-Na-2zI"/>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vzm-ue-JII" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="322" y="-395"/>
         </scene>
@@ -258,7 +258,7 @@
         <scene sceneID="dX2-pt-Aq9">
             <objects>
                 <tabBarController definesPresentationContext="YES" id="WSX-Sn-o5R" sceneMemberID="viewController">
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="RLI-2l-Gd0">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -277,9 +277,6 @@
     <classes>
         <class className="MBActionSheetViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MBActionSheetViewController.h"/>
-        </class>
-        <class className="MBViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/MBViewController.h"/>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

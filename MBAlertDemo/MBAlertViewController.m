@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Matthias Bauch. All rights reserved.
 //
 
-#import "MBViewController.h"
+#import "MBAlertViewController.h"
 
-@interface MBViewController ()
+@interface MBAlertViewController ()
 
 @end
 
-@implementation MBViewController
+@implementation MBAlertViewController
 
 - (void)viewDidLoad
 {

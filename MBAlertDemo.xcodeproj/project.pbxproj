@@ -18,7 +18,7 @@
 		3914972B16D23F3800864DF1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3914972A16D23F3800864DF1 /* Default-568h@2x.png */; };
 		3914972E16D23F3800864DF1 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3914972C16D23F3800864DF1 /* MainStoryboard_iPhone.storyboard */; };
 		3914973116D23F3800864DF1 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3914972F16D23F3800864DF1 /* MainStoryboard_iPad.storyboard */; };
-		3914973416D23F3800864DF1 /* MBViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3914973316D23F3800864DF1 /* MBViewController.m */; };
+		3914973416D23F3800864DF1 /* MBAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3914973316D23F3800864DF1 /* MBAlertViewController.m */; };
 		3914973C16D2429C00864DF1 /* MBActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3914973B16D2429C00864DF1 /* MBActionSheetViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -38,8 +38,8 @@
 		3914972A16D23F3800864DF1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3914972D16D23F3800864DF1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		3914973016D23F3800864DF1 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
-		3914973216D23F3800864DF1 /* MBViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBViewController.h; sourceTree = "<group>"; };
-		3914973316D23F3800864DF1 /* MBViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBViewController.m; sourceTree = "<group>"; };
+		3914973216D23F3800864DF1 /* MBAlertViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBAlertViewController.h; sourceTree = "<group>"; };
+		3914973316D23F3800864DF1 /* MBAlertViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBAlertViewController.m; sourceTree = "<group>"; };
 		3914973A16D2429C00864DF1 /* MBActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBActionSheetViewController.h; sourceTree = "<group>"; };
 		3914973B16D2429C00864DF1 /* MBActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBActionSheetViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,8 +92,8 @@
 				3914972416D23F3800864DF1 /* MBAppDelegate.m */,
 				3914972C16D23F3800864DF1 /* MainStoryboard_iPhone.storyboard */,
 				3914972F16D23F3800864DF1 /* MainStoryboard_iPad.storyboard */,
-				3914973216D23F3800864DF1 /* MBViewController.h */,
-				3914973316D23F3800864DF1 /* MBViewController.m */,
+				3914973216D23F3800864DF1 /* MBAlertViewController.h */,
+				3914973316D23F3800864DF1 /* MBAlertViewController.m */,
 				3914973A16D2429C00864DF1 /* MBActionSheetViewController.h */,
 				3914973B16D2429C00864DF1 /* MBActionSheetViewController.m */,
 				3914971B16D23F3800864DF1 /* Supporting Files */,
@@ -185,7 +185,7 @@
 			files = (
 				3914972116D23F3800864DF1 /* main.m in Sources */,
 				3914972516D23F3800864DF1 /* MBAppDelegate.m in Sources */,
-				3914973416D23F3800864DF1 /* MBViewController.m in Sources */,
+				3914973416D23F3800864DF1 /* MBAlertViewController.m in Sources */,
 				3914973C16D2429C00864DF1 /* MBActionSheetViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
