@@ -14,9 +14,6 @@
 // e.g. UIKeyboardWillChangeFrameNotification
 #endif
 
-NSString * const MBAnimationType = @"MBAnimationType";
-NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
-NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
 static NSString * const MBAnimationType = @"MBAnimationType";
 static NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
 static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
@@ -34,7 +31,7 @@ static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
 
 
 
-@interface MBAlertView () <UITextFieldDelegate>
+@interface MBAlertView ()
 
 @property (strong, nonatomic) UIView *alertView;
 @property (strong, nonatomic) UIScrollView *textScrollView;
@@ -75,14 +72,24 @@ static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
         _textField0 = [[UITextField alloc] initWithFrame:CGRectZero];
         _textField0.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
         _textField0.borderStyle = UITextBorderStyleRoundedRect;
-        _textField0.delegate = self;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChangedText:) name:UITextFieldTextDidChangeNotification object:_textField0];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChangedText:) name:UITextFieldTextDidBeginEditingNotification object:_textField0];
+        
         
         _textField1 = [[UITextField alloc] initWithFrame:CGRectZero];
         _textField1.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
         _textField1.borderStyle = UITextBorderStyleRoundedRect;
-        _textField1.delegate = self;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChangedText:) name:UITextFieldTextDidChangeNotification object:_textField1];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChangedText:) name:UITextFieldTextDidBeginEditingNotification object:_textField1];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:_textField0];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidBeginEditingNotification object:_textField0];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:_textField1];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidBeginEditingNotification object:_textField1];
 }
 
 - (id)initWithTitle:(NSString *)title message:(NSString *)message {
@@ -94,9 +101,14 @@ static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
 }
 
 - (NSInteger)addButtonWithTitle:(NSString *)title action:(void (^)(void))actionBlock {
+    return [self addButtonWithTitle:title action:actionBlock enable:nil];
+}
+
+- (NSInteger)addButtonWithTitle:(NSString *)title action:(void (^)(void))actionBlock enable:(BOOL (^)(void))enableBlock {
     MBAlertButton *button = [[MBAlertButton alloc] init];
     button.buttonTitle = title;
     button.actionBlock = actionBlock;
+    button.enableButtonBlock = enableBlock;
     [_buttons addObject:button];
     NSInteger index = [_buttons count] - 1;
     return index;
@@ -343,7 +355,6 @@ static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
     _originalAlertFrame = _alertView.frame;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardFrameDidChange:) name:UIKeyboardWillChangeFrameNotification object:nil];
 
-    
     CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
     scaleAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(0, 0, 0)];
     scaleAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1, 1, 1)];
@@ -473,5 +484,18 @@ static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
     }];
 }
 
+- (void)evaluateButtonEnabledStates {
+    for (MBAlertButton *button in self.buttons) {
+        BOOL enable = YES;
+        if (button.enableButtonBlock) {
+            enable = button.enableButtonBlock();
+        }
+        button.button.enabled = enable;
+    }
+}
+
+- (void)textFieldChangedText:(NSNotification *)notification {
+    [self evaluateButtonEnabledStates];
+}
 
 @end
