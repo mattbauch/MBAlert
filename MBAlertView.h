@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, MBAlertViewStyle) {
 @property (readonly, nonatomic) UITextField *textField1;
 
 - (NSInteger)addButtonWithTitle:(NSString *)title action:(void (^)(void))actionBlock;
-- (NSInteger)addButtonWithTitle:(NSString *)title action:(void (^)(void))actionBlock enable:(BOOL (^)(void))enableBlock;
+- (NSInteger)addButtonWithTitle:(NSString *)title action:(void (^)(void))actionBlock enable:(BOOL (^)(UIButton *button))enableBlock;
 
 - (id)initWithTitle:(NSString *)title message:(NSString *)message;
 - (void)show;

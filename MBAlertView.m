@@ -23,7 +23,7 @@ static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
 @property (strong, nonatomic) UIButton *button;
 @property (strong, nonatomic) NSString *buttonTitle;
 @property (copy, nonatomic) void (^actionBlock)(void);
-@property (copy, nonatomic) BOOL (^enableButtonBlock)(void);
+@property (copy, nonatomic) BOOL (^enableButtonBlock)(UIButton *);
 @end
 
 @implementation MBAlertButton
@@ -104,7 +104,7 @@ static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
     return [self addButtonWithTitle:title action:actionBlock enable:nil];
 }
 
-- (NSInteger)addButtonWithTitle:(NSString *)title action:(void (^)(void))actionBlock enable:(BOOL (^)(void))enableBlock {
+- (NSInteger)addButtonWithTitle:(NSString *)title action:(void (^)(void))actionBlock enable:(BOOL (^)(UIButton *))enableBlock {
     MBAlertButton *button = [[MBAlertButton alloc] init];
     button.buttonTitle = title;
     button.actionBlock = actionBlock;
@@ -488,7 +488,7 @@ static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
     for (MBAlertButton *button in self.buttons) {
         BOOL enable = YES;
         if (button.enableButtonBlock) {
-            enable = button.enableButtonBlock();
+            enable = button.enableButtonBlock(button.button);
         }
         button.button.enabled = enable;
     }
