@@ -8,15 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, MBAlertStyle) {
-    MBAlertStyleRegular
+typedef NS_ENUM(NSInteger, MBAlertViewStyle) {
+    MBAlertViewStyleDefault,
+    MBAlertViewStyleSecureTextInput,
+    MBAlertViewStylePlainTextInput,
+    MBAlertViewStyleLoginAndPasswordInput
 };
 
 @interface MBAlertView : UIView
 @property (copy, nonatomic) NSString *title;
 @property (copy, nonatomic) NSString *message;
 
-@property (assign, nonatomic) MBAlertStyle alertStyle;
+@property (assign, nonatomic) MBAlertViewStyle alertStyle;
 
 @property (assign, nonatomic) NSInteger cancelButtonIndex;
 @property (assign, nonatomic) NSInteger destructiveButtonIndex;
