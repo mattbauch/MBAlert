@@ -16,6 +16,7 @@
 
 NSString * const MBAnimationType = @"MBAnimationType";
 NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
+NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
 
 @interface MBAlertButton : NSObject
 @property (strong, nonatomic) UIButton *button;
@@ -328,6 +329,8 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
     CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
     scaleAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(0, 0, 0)];
     scaleAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1, 1, 1)];
+    scaleAnimation.delegate = self;
+    [scaleAnimation setValue:MBAlertViewAnimationShow forKey:MBAnimationType];
     [self.alertView.layer addAnimation:scaleAnimation forKey:@"scale"];
     
     CABasicAnimation *backgroundColor = [CABasicAnimation animationWithKeyPath:@"backgroundColor"];
@@ -394,6 +397,14 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
     if ([type isEqualToString:MBAlertViewAnimationDismiss]) {
         // animation did dismiss alert
         [self removeFromSuperview];
+    }
+    else if ([type isEqualToString:MBAlertViewAnimationShow]) {
+        if (self.alertStyle != MBAlertViewStyleDefault) {
+            [self.textField0 becomeFirstResponder];
+        }
+    }
+    else {
+        NSLog(@"Unknown Animation %@", type ? : anim);
     }
 }
 
