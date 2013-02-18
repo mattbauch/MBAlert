@@ -41,8 +41,6 @@ static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
 @property (strong, nonatomic) UIScrollView *buttonScrollView;
 
 @property (strong, nonatomic) NSMutableArray *buttons;
-@property (strong, nonatomic) MBAlertButton *cancelButton;
-@property (strong, nonatomic) MBAlertButton *destructiveButton;
 @end
 
 @implementation MBAlertView {
