@@ -56,14 +56,17 @@
         [alert addButtonWithTitle:@"Cancel"];
     }
     else if (sender == self.uiAlertPlainTextFieldButton) {
+        [alert addButtonWithTitle:@"Cancel"];
         [alert addButtonWithTitle:@"Set"];
         alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     }
     else if (sender == self.uiAlertSecretTextFieldButton) {
-        [alert addButtonWithTitle:@"Set"];
+        [alert addButtonWithTitle:@"Cancel"];
+        [alert addButtonWithTitle:@"Change Password"];
         alert.alertViewStyle = UIAlertViewStyleSecureTextInput;
     }
     else if (sender == self.uiLoginTextFieldButton) {
+        [alert addButtonWithTitle:@"Cancel"];
         [alert addButtonWithTitle:@"Set"];
         alert.alertViewStyle = UIAlertViewStyleLoginAndPasswordInput;
     }
@@ -115,8 +118,23 @@
     }
     else if (sender == self.mbAlertPlainTextFieldButton) {
         __weak MBAlertView *weakAlert = alert;
-        [alert addButtonWithTitle:@"Set" action:^{
-            NSLog(@"Set %@", weakAlert.textField0.text);
+        [alert addButtonWithTitle:@"Clear" action:^{
+            NSString *text = [weakAlert.textField0.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            if ([text length] == 0) {
+                NSLog(@"Clear text");
+            }
+            else {
+                NSLog(@"Set %@", weakAlert.textField0.text);
+            }
+        } enable:^BOOL(UIButton *button) {
+            NSString *text = [weakAlert.textField0.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            if ([text length] == 0) {
+                [button setTitle:@"Clear" forState:UIControlStateNormal];                
+            }
+            else {
+                [button setTitle:@"Set" forState:UIControlStateNormal];
+            }
+            return YES;
         }];
         [alert addButtonWithTitle:@"Cancel" action:^{
             NSLog(@"Cancel");
@@ -125,8 +143,15 @@
     }
     else if (sender == self.mbAlertSecretTextFieldButton) {
         __weak MBAlertView *weakAlert = alert;
-        [alert addButtonWithTitle:@"Set" action:^{
+        [alert addButtonWithTitle:@"Change Password" action:^{
             NSLog(@"Set %@", weakAlert.textField0.text);
+        } enable:^BOOL(UIButton *button) {
+            NSString *password = [weakAlert.textField0.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            
+            if ([password length] == 0) {
+                return NO;
+            }
+            return YES;
         }];
         [alert addButtonWithTitle:@"Cancel" action:^{
             NSLog(@"Cancel");
@@ -137,6 +162,14 @@
         __weak MBAlertView *weakAlert = alert;
         [alert addButtonWithTitle:@"Set" action:^{
             NSLog(@"Set \"%@\" - \"%@\"", weakAlert.textField0.text, weakAlert.textField1.text);
+        } enable:^BOOL(UIButton *button) {
+            NSString *username = [weakAlert.textField0.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            NSString *password = [weakAlert.textField1.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            
+            if ([username length] == 0 || [password length] == 0) {
+                return NO;
+            }
+            return YES;
         }];
         [alert addButtonWithTitle:@"Cancel" action:^{
             NSLog(@"Cancel");
