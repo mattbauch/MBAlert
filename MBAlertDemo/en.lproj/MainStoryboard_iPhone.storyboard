@@ -269,6 +269,96 @@
                                     <action selector="mbButtonPressed:" destination="gYP-61-qf2" eventType="touchUpInside" id="5g1-XZ-mfZ"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="WyI-2F-j06">
+                                <rect key="frame" x="10" y="250" width="146" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Plain TextField">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="uiButtonPressed:" destination="gYP-61-qf2" eventType="touchUpInside" id="dRA-pV-Vs1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wBb-Yf-gAu">
+                                <rect key="frame" x="10" y="301" width="146" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Secret TextField">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="uiButtonPressed:" destination="gYP-61-qf2" eventType="touchUpInside" id="hGt-cg-MrX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="emm-z9-Vix">
+                                <rect key="frame" x="10" y="352" width="146" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Login TextFields">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="uiButtonPressed:" destination="gYP-61-qf2" eventType="touchUpInside" id="Umf-vS-1dz"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="T7z-rh-P9b">
+                                <rect key="frame" x="164" y="250" width="146" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Plain TextField">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="mbButtonPressed:" destination="gYP-61-qf2" eventType="touchUpInside" id="KZM-YU-tlk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pWO-Nx-utg">
+                                <rect key="frame" x="164" y="301" width="146" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Secret TextField">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="mbButtonPressed:" destination="gYP-61-qf2" eventType="touchUpInside" id="SaR-FM-3Aa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="OSY-hu-zqz">
+                                <rect key="frame" x="164" y="352" width="146" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Login TextFields">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="mbButtonPressed:" destination="gYP-61-qf2" eventType="touchUpInside" id="JGI-qg-YJg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -278,10 +368,16 @@
                         <outlet property="mbAlert2Button" destination="7x1-h7-pBi" id="La6-Bb-6D5"/>
                         <outlet property="mbAlert3Button" destination="f9E-fO-Jek" id="Sxd-KN-xhs"/>
                         <outlet property="mbAlertNoButton" destination="h9t-O9-h1S" id="Q3e-yN-bBt"/>
+                        <outlet property="mbAlertPlainTextFieldButton" destination="T7z-rh-P9b" id="kaN-nM-7BC"/>
+                        <outlet property="mbAlertSecretTextFieldButton" destination="pWO-Nx-utg" id="Aoz-j0-atz"/>
+                        <outlet property="mbLoginTextFieldButton" destination="OSY-hu-zqz" id="PpD-kY-6tf"/>
                         <outlet property="uiAlert1Button" destination="wiS-pU-lt0" id="2kn-Ex-UPR"/>
                         <outlet property="uiAlert2Button" destination="GXp-ZQ-gfP" id="kNJ-Se-49c"/>
                         <outlet property="uiAlert3Button" destination="I5f-cx-zgq" id="1or-7S-pod"/>
                         <outlet property="uiAlertNoButton" destination="IF9-IW-Ne8" id="gBL-8k-3de"/>
+                        <outlet property="uiAlertPlainTextFieldButton" destination="WyI-2F-j06" id="bHd-Aq-OgK"/>
+                        <outlet property="uiAlertSecretTextFieldButton" destination="wBb-Yf-gAu" id="gHm-cW-q1u"/>
+                        <outlet property="uiLoginTextFieldButton" destination="emm-z9-Vix" id="izh-GG-TLo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vzm-ue-JII" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -321,10 +417,16 @@
                 <relationship kind="outlet" name="mbAlert2Button" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="mbAlert3Button" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="mbAlertNoButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="mbAlertPlainTextFieldButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="mbAlertSecretTextFieldButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="mbLoginTextFieldButton" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="uiAlert1Button" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="uiAlert2Button" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="uiAlert3Button" candidateClass="UIButton"/>
                 <relationship kind="outlet" name="uiAlertNoButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="uiAlertPlainTextFieldButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="uiAlertSecretTextFieldButton" candidateClass="UIButton"/>
+                <relationship kind="outlet" name="uiLoginTextFieldButton" candidateClass="UIButton"/>
             </relationships>
         </class>
     </classes>
