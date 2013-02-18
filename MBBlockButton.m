@@ -10,22 +10,18 @@
 
 @implementation MBBlockButton
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
++ (instancetype)buttonWithTitle:(NSString *)title action:(void (^)(void))actionBlock enable:(BOOL (^)(UIButton *button))enableBlock {
+    return [[self alloc] initWithTitle:title action:actionBlock enable:enableBlock];
+}
+
+- (id)initWithTitle:(NSString *)title action:(void (^)(void))actionBlock enable:(BOOL (^)(UIButton *button))enableBlock {
+    self = [super init];
     if (self) {
-        // Initialization code
+        _buttonTitle = [title copy];
+        _actionBlock = [actionBlock copy];
+        _enableButtonBlock = [enableBlock copy];
     }
     return self;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

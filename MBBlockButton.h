@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MBBlockButton : UIView
+@interface MBBlockButton : NSObject
 @property (strong, nonatomic) UIButton *button;
-@property (strong, nonatomic) NSString *buttonTitle;
-@property (copy, nonatomic) void (^actionBlock)(void);
-@property (copy, nonatomic) BOOL (^enableButtonBlock)(UIButton *);
+@property (readonly, nonatomic) NSString *buttonTitle;
+@property (readonly, nonatomic) void (^actionBlock)(void);
+@property (readonly, nonatomic) BOOL (^enableButtonBlock)(UIButton *);
+
++ (instancetype)buttonWithTitle:(NSString *)title action:(void (^)(void))actionBlock enable:(BOOL (^)(UIButton *button))enableBlock;
+- (id)initWithTitle:(NSString *)title action:(void (^)(void))actionBlock enable:(BOOL (^)(UIButton *button))enableBlock;
+
 @end

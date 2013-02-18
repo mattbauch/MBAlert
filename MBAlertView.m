@@ -91,13 +91,9 @@ static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
 }
 
 - (NSInteger)addButtonWithTitle:(NSString *)title action:(void (^)(void))actionBlock enable:(BOOL (^)(UIButton *))enableBlock {
-    MBBlockButton *button = [[MBBlockButton alloc] init];
-    button.buttonTitle = title;
-    button.actionBlock = actionBlock;
-    button.enableButtonBlock = enableBlock;
+    MBBlockButton *button = [MBBlockButton buttonWithTitle:title action:actionBlock enable:enableBlock];
     [_buttons addObject:button];
-    NSInteger index = [_buttons count] - 1;
-    return index;
+    return [_buttons count] - 1;
 }
 
 - (void)show {
