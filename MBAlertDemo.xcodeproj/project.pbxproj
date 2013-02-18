@@ -23,6 +23,7 @@
 		3914974816D243CB00864DF1 /* MBActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3914974716D243CB00864DF1 /* MBActionSheet.m */; };
 		3914974B16D243D700864DF1 /* MBAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3914974A16D243D700864DF1 /* MBAlertView.m */; };
 		39E0675516D24D6200A3A329 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39E0675416D24D6200A3A329 /* QuartzCore.framework */; };
+		39E0676916D2A76D00A3A329 /* MBBlockButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 39E0676816D2A76D00A3A329 /* MBBlockButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,8 @@
 		3914974916D243D700864DF1 /* MBAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBAlertView.h; sourceTree = SOURCE_ROOT; };
 		3914974A16D243D700864DF1 /* MBAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBAlertView.m; sourceTree = SOURCE_ROOT; };
 		39E0675416D24D6200A3A329 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		39E0676716D2A76D00A3A329 /* MBBlockButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBBlockButton.h; sourceTree = "<group>"; };
+		39E0676816D2A76D00A3A329 /* MBBlockButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBBlockButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +77,8 @@
 				3914974716D243CB00864DF1 /* MBActionSheet.m */,
 				3914974916D243D700864DF1 /* MBAlertView.h */,
 				3914974A16D243D700864DF1 /* MBAlertView.m */,
+				39E0676716D2A76D00A3A329 /* MBBlockButton.h */,
+				39E0676816D2A76D00A3A329 /* MBBlockButton.m */,
 				3914971A16D23F3800864DF1 /* MBAlertDemo */,
 				3914971316D23F3800864DF1 /* Frameworks */,
 				3914971216D23F3800864DF1 /* Products */,
@@ -203,6 +208,7 @@
 				3914973C16D2429C00864DF1 /* MBActionSheetViewController.m in Sources */,
 				3914974816D243CB00864DF1 /* MBActionSheet.m in Sources */,
 				3914974B16D243D700864DF1 /* MBAlertView.m in Sources */,
+				39E0676916D2A76D00A3A329 /* MBBlockButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

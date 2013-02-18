@@ -7,6 +7,7 @@
 //
 
 #import "MBAlertView.h"
+#import "MBBlockButton.h"
 #import <QuartzCore/QuartzCore.h>
 
 #if __IPHONE_OS_VERSION_MIN_REQUIRED < __IPHONE_5_0
@@ -17,19 +18,6 @@
 static NSString * const MBAnimationType = @"MBAnimationType";
 static NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
 static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
-
-
-@interface MBAlertButton : NSObject
-@property (strong, nonatomic) UIButton *button;
-@property (strong, nonatomic) NSString *buttonTitle;
-@property (copy, nonatomic) void (^actionBlock)(void);
-@property (copy, nonatomic) BOOL (^enableButtonBlock)(UIButton *);
-@end
-
-@implementation MBAlertButton
-@end
-
-
 
 @interface MBAlertView ()
 
@@ -103,7 +91,7 @@ static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
 }
 
 - (NSInteger)addButtonWithTitle:(NSString *)title action:(void (^)(void))actionBlock enable:(BOOL (^)(UIButton *))enableBlock {
-    MBAlertButton *button = [[MBAlertButton alloc] init];
+    MBBlockButton *button = [[MBBlockButton alloc] init];
     button.buttonTitle = title;
     button.actionBlock = actionBlock;
     button.enableButtonBlock = enableBlock;
@@ -275,7 +263,7 @@ static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
         
     const NSInteger buttonCount = [self.buttons count];
     for (NSInteger i = 0; i < buttonCount; i++) {
-        MBAlertButton *alertButton = self.buttons[i];
+        MBBlockButton *alertButton = self.buttons[i];
         NSString *buttonTitle = alertButton.buttonTitle;
         UIButton *button = alertButton.button;
         if (!button) {
@@ -378,16 +366,16 @@ static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
 #pragma mark - IBAction
 
 - (IBAction)alertButtonPressed:(UIButton *)sender {
-    MBAlertButton *alertButton = [self alertButtonForUIButton:sender];
+    MBBlockButton *alertButton = [self alertButtonForUIButton:sender];
     if (alertButton.actionBlock) {
         alertButton.actionBlock();
     }
     [self dismissView:YES];
 }
 
-- (MBAlertButton *)alertButtonForUIButton:(UIButton *)button {
+- (MBBlockButton *)alertButtonForUIButton:(UIButton *)button {
     NSIndexSet *indexes = [self.buttons indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-        MBAlertButton *alertButton = obj;
+        MBBlockButton *alertButton = obj;
         if (alertButton.button == button) {
             *stop = YES;
             return YES;
@@ -487,7 +475,7 @@ static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
 }
 
 - (void)evaluateButtonEnabledStates {
-    for (MBAlertButton *button in self.buttons) {
+    for (MBBlockButton *button in self.buttons) {
         BOOL enable = YES;
         if (button.enableButtonBlock) {
             enable = button.enableButtonBlock(button.button);
