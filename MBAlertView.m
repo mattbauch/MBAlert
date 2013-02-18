@@ -83,6 +83,13 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
     NSCParameterAssert(window);
     [window addSubview:self];
     
+    UIImage *regularButtonBackgroundNormal = [[UIImage imageNamed:@"alertRegularButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 18, 0, 18)];
+    UIImage *regularButtonBackgroundPressed = [[UIImage imageNamed:@"alertRegularButtonPressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 18, 0, 18)];;
+    UIImage *cancelButtonBackgroundNormal = [[UIImage imageNamed:@"alertCancelButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 18, 0, 18)];
+    UIImage *cancelButtonBackgroundPressed = [[UIImage imageNamed:@"alertCancelPressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 18, 0, 18)];
+    UIImage *destructiveButtonBackgroundNormal = [[UIImage imageNamed:@"alertDestructiveButton"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 18, 0, 18)];
+    UIImage *destructiveButtonBackgroundPressed = [[UIImage imageNamed:@"alertDestructiveButtonPressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 18, 0, 18)];
+
     CGFloat windowHeight = window.bounds.size.height;
     CGFloat windowWidth = window.bounds.size.width;
 
@@ -120,6 +127,10 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
         cancelButtonOffset = edgeInset * 2;
     }
     CGFloat singleButtonHeight = 46.0f;
+    
+    if (regularButtonBackgroundNormal) {
+        singleButtonHeight = regularButtonBackgroundNormal.size.height;
+    }
     CGFloat buttonsHeight = numberOfButtonRows * singleButtonHeight + (numberOfButtonRows-1) * edgeInset + cancelButtonOffset;
     CGRect buttonsRect = CGRectMake(edgeInset, textFieldRect.origin.y + textFieldRect.size.height, usableAlertWidth, buttonsHeight);
     
@@ -138,7 +149,7 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
 
     [self addSubview:_alertView];
     
-    UIImage *background = [[UIImage imageNamed:@"alert-window"] resizableImageWithCapInsets:UIEdgeInsetsMake(38, 0, 12, 0)];
+    UIImage *background = [[UIImage imageNamed:@"alertBackground"] resizableImageWithCapInsets:UIEdgeInsetsMake(38, 0, 12, 0)];
     if (background) {
         UIImageView *imageView = [[UIImageView alloc] initWithImage:background];
         imageView.frame = _alertView.bounds;
@@ -184,17 +195,7 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
     _buttonScrollView = [[UIScrollView alloc] initWithFrame:buttonsRect];
     _buttonScrollView.contentSize = buttonsRect.size;
     [_alertView addSubview:_buttonScrollView];
-    
-    _buttonScrollView.backgroundColor = [UIColor blueColor];
-    
-    UIImage *regularButtonBackgroundNormal = [[UIImage imageNamed:@"ButtonRegular"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 13)];
-    UIImage *regularButtonBackgroundPressed = [[UIImage imageNamed:@"ButtonRegularPressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 13)];
-    UIImage *cancelButtonBackgroundNormal = [[UIImage imageNamed:@"ButtonCancel"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 13)];
-    UIImage *cancelButtonBackgroundPressed = [[UIImage imageNamed:@"ButtonRegularPressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 13)];
-    UIImage *destructiveButtonBackgroundNormal = [[UIImage imageNamed:@"ButtonDestructive"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 13)];
-    UIImage *destructiveButtonBackgroundPressed = [[UIImage imageNamed:@"ButtonDestructivePressed"] resizableImageWithCapInsets:UIEdgeInsetsMake(0, 13, 0, 13)];
-
-    
+        
     const NSInteger buttonCount = [self.buttons count];
     for (NSInteger i = 0; i < buttonCount; i++) {
         MBAlertButton *alertButton = self.buttons[i];
@@ -203,40 +204,43 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
         if (!button) {
             button = [UIButton buttonWithType:UIButtonTypeCustom];
         }
-        if (alertButton == self.destructiveButton) {
-            if (!destructiveButtonBackgroundNormal) {
-                // if no images replace custom button with round button
+        if (i == _destructiveButtonIndex) {
+            if (destructiveButtonBackgroundNormal) {
+                [button setBackgroundImage:destructiveButtonBackgroundNormal forState:UIControlStateNormal];
+                [button setBackgroundImage:destructiveButtonBackgroundPressed forState:UIControlStateHighlighted];
+                [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+                button.titleLabel.shadowOffset = CGSizeMake(0, -1);
+            }
+            else {
                 button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
             }
-            [button setBackgroundImage:destructiveButtonBackgroundNormal forState:UIControlStateNormal];
-            [button setBackgroundImage:destructiveButtonBackgroundPressed forState:UIControlStateHighlighted];
-            [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
         }
-        else if (alertButton == self.cancelButton) {
-            if (!cancelButtonBackgroundNormal) {
-                // if no images replace custom button with round button
+        else if (i == _cancelButtonIndex || (_cancelButtonIndex == -1 && i == buttonCount-1)) {
+            if (cancelButtonBackgroundNormal) {
+                [button setBackgroundImage:cancelButtonBackgroundNormal forState:UIControlStateNormal];
+                [button setBackgroundImage:cancelButtonBackgroundPressed forState:UIControlStateHighlighted];
+                button.titleLabel.shadowOffset = CGSizeMake(0, -1);
+            }
+            else {
                 button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
             }
-            [button setBackgroundImage:cancelButtonBackgroundNormal forState:UIControlStateNormal];
-            [button setBackgroundImage:cancelButtonBackgroundPressed forState:UIControlStateHighlighted];
         }
         else {
-            if (!regularButtonBackgroundNormal) {
-                // if no images replace custom button with round button
+            if (regularButtonBackgroundNormal) {
+                [button setBackgroundImage:regularButtonBackgroundNormal forState:UIControlStateNormal];
+                [button setBackgroundImage:regularButtonBackgroundPressed forState:UIControlStateHighlighted];
+                [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
+                button.titleLabel.shadowOffset = CGSizeMake(0, -1);
+            }
+            else {
                 button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
             }
-            [button setBackgroundImage:regularButtonBackgroundNormal forState:UIControlStateNormal];
-            //            [button setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
-            [button setBackgroundImage:regularButtonBackgroundPressed forState:UIControlStateHighlighted];
-            //            [button setTitleColor:[UIColor whiteColor] forState:UIControlStateHighlighted];
-            [button setTitleColor:[UIColor lightGrayColor] forState:UIControlStateDisabled];
         }
         
         button.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
         alertButton.button = button;
         [button setTitle:buttonTitle forState:UIControlStateNormal];
         button.titleLabel.font = buttonFont;
-        button.titleLabel.shadowOffset = CGSizeMake(0, -1);
         if ([button.titleLabel respondsToSelector:@selector(setMinimumScaleFactor:)]) {
             [button.titleLabel setMinimumScaleFactor:0.5];
         }
@@ -251,8 +255,7 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
         CGRect buttonFrame = CGRectZero;
         if (buttonCount == 2) {
             CGFloat buttonWidth = (usableAlertWidth/2) - (edgeInset/2);
-            NSInteger leftButtonIndex = self.cancelButton ? 1 : 0; // Cancel should be left button
-            if (i == leftButtonIndex) {
+            if ((i == _cancelButtonIndex || (_cancelButtonIndex == -1 && i == buttonCount-1))) {
                 buttonFrame = CGRectMake(0, buttonY, buttonWidth, singleButtonHeight);
             }
             else {
@@ -268,7 +271,6 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
         }
         button.frame = buttonFrame;
     }
-    
     
     CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
     scaleAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(0, 0, 0)];
