@@ -24,24 +24,21 @@ typedef NS_ENUM(NSInteger, MBAlertViewStyle) {
 @property (assign, nonatomic) NSInteger cancelButtonIndex;
 @property (assign, nonatomic) NSInteger destructiveButtonIndex;
 
-// appearance
-
 @property (strong, nonatomic) UIFont *titleFont;
 @property (strong, nonatomic) UIFont *messageFont;
 @property (strong, nonatomic) UIFont *buttonFont;
 
-
-// views
-
 @property (readonly, nonatomic) UITextField *textField0;
 @property (readonly, nonatomic) UITextField *textField1;
+
+- (id)initWithTitle:(NSString *)title message:(NSString *)message;
 
 - (NSInteger)addButtonWithTitle:(NSString *)title action:(void (^)(void))actionBlock;
 - (NSInteger)addButtonWithTitle:(NSString *)title action:(void (^)(void))actionBlock enable:(BOOL (^)(UIButton *button))enableBlock;
 
-- (id)initWithTitle:(NSString *)title message:(NSString *)message;
 - (void)show;
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated;
 
 - (void)evaluateButtonEnabledStates;
+
 @end
