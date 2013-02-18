@@ -102,11 +102,12 @@
         }];
     }
     else if (sender == self.mbAlert3Button) {
-        [alert addButtonWithTitle:@"Normal Button 1" action:^{
-            NSLog(@"Normal Button 1");
+        NSInteger destructiveIndex = [alert addButtonWithTitle:@"Delete" action:^{
+            NSLog(@"Delete");
         }];
-        [alert addButtonWithTitle:@"Normal Button 2" action:^{
-            NSLog(@"Normal Button 2");
+        alert.destructiveButtonIndex = destructiveIndex;
+        [alert addButtonWithTitle:@"Normal Button" action:^{
+            NSLog(@"Normal Button");
         }];
         [alert addButtonWithTitle:@"Cancel" action:^{
             NSLog(@"Cancel");
@@ -117,6 +118,9 @@
         [alert addButtonWithTitle:@"Set" action:^{
             NSLog(@"Set %@", weakAlert.textField0.text);
         }];
+        [alert addButtonWithTitle:@"Cancel" action:^{
+            NSLog(@"Cancel");
+        }];
         alert.alertStyle = MBAlertViewStylePlainTextInput;
     }
     else if (sender == self.mbAlertSecretTextFieldButton) {
@@ -124,12 +128,18 @@
         [alert addButtonWithTitle:@"Set" action:^{
             NSLog(@"Set %@", weakAlert.textField0.text);
         }];
+        [alert addButtonWithTitle:@"Cancel" action:^{
+            NSLog(@"Cancel");
+        }];
         alert.alertStyle = MBAlertViewStyleSecureTextInput;
     }
     else if (sender == self.mbLoginTextFieldButton) {
         __weak MBAlertView *weakAlert = alert;
         [alert addButtonWithTitle:@"Set" action:^{
             NSLog(@"Set \"%@\" - \"%@\"", weakAlert.textField0.text, weakAlert.textField1.text);
+        }];
+        [alert addButtonWithTitle:@"Cancel" action:^{
+            NSLog(@"Cancel");
         }];
         alert.alertStyle = MBAlertViewStyleLoginAndPasswordInput;
     }
