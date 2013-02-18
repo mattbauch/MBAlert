@@ -21,6 +21,7 @@
 		3914973416D23F3800864DF1 /* MBAlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3914973316D23F3800864DF1 /* MBAlertViewController.m */; };
 		3914973C16D2429C00864DF1 /* MBActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3914973B16D2429C00864DF1 /* MBActionSheetViewController.m */; };
 		3914974816D243CB00864DF1 /* MBActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = 3914974716D243CB00864DF1 /* MBActionSheet.m */; };
+		3914974B16D243D700864DF1 /* MBAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3914974A16D243D700864DF1 /* MBAlertView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,8 @@
 		3914973B16D2429C00864DF1 /* MBActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBActionSheetViewController.m; sourceTree = "<group>"; };
 		3914974616D243CB00864DF1 /* MBActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBActionSheet.h; sourceTree = SOURCE_ROOT; };
 		3914974716D243CB00864DF1 /* MBActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBActionSheet.m; sourceTree = SOURCE_ROOT; };
+		3914974916D243D700864DF1 /* MBAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBAlertView.h; sourceTree = SOURCE_ROOT; };
+		3914974A16D243D700864DF1 /* MBAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBAlertView.m; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +69,8 @@
 			children = (
 				3914974616D243CB00864DF1 /* MBActionSheet.h */,
 				3914974716D243CB00864DF1 /* MBActionSheet.m */,
+				3914974916D243D700864DF1 /* MBAlertView.h */,
+				3914974A16D243D700864DF1 /* MBAlertView.m */,
 				3914971A16D23F3800864DF1 /* MBAlertDemo */,
 				3914971316D23F3800864DF1 /* Frameworks */,
 				3914971216D23F3800864DF1 /* Products */,
@@ -193,6 +198,7 @@
 				3914973416D23F3800864DF1 /* MBAlertViewController.m in Sources */,
 				3914973C16D2429C00864DF1 /* MBActionSheetViewController.m in Sources */,
 				3914974816D243CB00864DF1 /* MBActionSheet.m in Sources */,
+				3914974B16D243D700864DF1 /* MBAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
