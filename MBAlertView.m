@@ -110,11 +110,22 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
     CGRect messageRect = CGRectMake(edgeInset, titleRect.origin.y + edgeInset + titleRect.size.height, usableAlertWidth, messageSize.height);
     
     CGRect textRect = CGRectMake(0, edgeInset/2, alertWidth, edgeInset/2 + titleRect.size.height + edgeInset + messageRect.size.height);
-    
-    CGFloat textFieldHeight = 0;
-    CGRect textFieldRect = CGRectMake(edgeInset, textRect.origin.y + edgeInset + textRect.size.height, usableAlertWidth, textFieldHeight);
-    
+
     alertHeight = textRect.origin.y + textRect.size.height;
+
+    CGRect textFieldRect = CGRectMake(edgeInset, textRect.origin.y + edgeInset + textRect.size.height, 0, 0);
+    if (self.alertStyle != MBAlertViewStyleDefault) {
+        CGFloat textFieldHeight = 0;
+        if (self.alertStyle == MBAlertViewStyleLoginAndPasswordInput) {
+            textFieldHeight = 30.0f + edgeInset/2 + 30.0f;
+        }
+        else {
+            textFieldHeight = 30.0f;
+        }
+        textFieldRect.size = CGSizeMake(usableAlertWidth, textFieldHeight + edgeInset);
+    }
+    
+    alertHeight += textFieldRect.size.height;
     
     CGFloat cancelButtonOffset = 0;
     NSInteger numberOfButtonRows = [self.buttons count];
@@ -191,6 +202,26 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
     [_textScrollView addSubview:_messageLabel];
     _messageLabel.text = self.message;
 
+    
+    if (self.alertStyle != MBAlertViewStyleDefault) {
+        CGRect textField0Frame = CGRectMake(edgeInset, textFieldRect.origin.y, usableAlertWidth, 30.0f);
+        _textField0 = [[UITextField alloc] initWithFrame:textField0Frame];
+        _textField0.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+        _textField0.borderStyle = UITextBorderStyleRoundedRect;
+        _textField0.delegate = self;
+        [_alertView addSubview:_textField0];
+        if (self.alertStyle == MBAlertViewStyleLoginAndPasswordInput) {
+            CGRect textField1Frame = CGRectMake(edgeInset, textFieldRect.origin.y + 30 + edgeInset/2, usableAlertWidth, 30.0f);
+            _textField1 = [[UITextField alloc] initWithFrame:textField1Frame];
+            _textField1.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+            _textField1.borderStyle = UITextBorderStyleRoundedRect;
+            _textField1.delegate = self;
+            [_alertView addSubview:_textField1];
+        }
+    }
+
+    
+    
     
     _buttonScrollView = [[UIScrollView alloc] initWithFrame:buttonsRect];
     _buttonScrollView.contentSize = buttonsRect.size;
