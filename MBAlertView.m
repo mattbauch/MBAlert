@@ -27,6 +27,11 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
 @interface MBAlertView ()
 
 @property (strong, nonatomic) UIView *alertView;
+@property (strong, nonatomic) UIScrollView *textScrollView;
+@property (strong, nonatomic) UILabel *titleLabel;
+@property (strong, nonatomic) UILabel *messageLabel;
+
+@property (strong, nonatomic) UIScrollView *buttonScrollView;
 
 @property (strong, nonatomic) NSMutableArray *buttons;
 @property (strong, nonatomic) MBAlertButton *cancelButton;
@@ -73,9 +78,29 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
     
     CGFloat windowHeight = window.bounds.size.height;
     CGFloat windowWidth = window.bounds.size.width;
-    
+
     CGFloat alertWidth = 280.0f;
-    CGFloat alertHeight = 200.0f;
+    CGFloat alertHeight = 0;
+    CGFloat edgeInset = 10.0f;
+    
+    CGFloat usableAlertWidth = alertWidth - 2 * edgeInset;
+    
+    UIFont *titleFont = self.titleFont ? : [UIFont boldSystemFontOfSize:18.0f];
+    UIFont *messageFont = self.messageFont ? : [UIFont systemFontOfSize:16.0f];
+    UIFont *buttonFont = self.buttonFont ? : [UIFont boldSystemFontOfSize:18.0f];
+    
+    CGSize titleSize = [self.title sizeWithFont:titleFont constrainedToSize:CGSizeMake(usableAlertWidth, 1000) lineBreakMode:NSLineBreakByWordWrapping];
+    CGSize messageSize = [self.message sizeWithFont:messageFont constrainedToSize:CGSizeMake(usableAlertWidth, 1000) lineBreakMode:NSLineBreakByWordWrapping];
+    
+    CGRect titleRect = CGRectMake(edgeInset, edgeInset/2, usableAlertWidth, titleSize.height);
+    CGRect messageRect = CGRectMake(edgeInset, titleRect.origin.y + edgeInset + titleRect.size.height, usableAlertWidth, messageSize.height);
+    
+    CGRect textRect = CGRectMake(0, edgeInset/2, alertWidth, edgeInset/2 + titleRect.size.height + edgeInset + messageRect.size.height);
+    
+    alertHeight = textRect.origin.y + textRect.size.height;
+    
+    // bottom edge
+    alertHeight += edgeInset;
     
     _alertView = [[UIView alloc] initWithFrame:CGRectMake(windowWidth/2 - alertWidth/2, windowHeight/2 - alertHeight/2, alertWidth, alertHeight)];
     _alertView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleBottomMargin;
@@ -99,8 +124,34 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
         _alertView.layer.borderWidth = 2.0f;
     }
 
-    
-    
+    _textScrollView = [[UIScrollView alloc] initWithFrame:textRect];
+    _textScrollView.contentSize = textRect.size;
+    [_alertView addSubview:_textScrollView];
+
+    _titleLabel = [[UILabel alloc] initWithFrame:titleRect];
+    _titleLabel.font = titleFont;
+    _titleLabel.numberOfLines = 0;
+    _titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    _titleLabel.textAlignment = NSTextAlignmentCenter;
+    _titleLabel.backgroundColor = [UIColor clearColor];
+    _titleLabel.textColor = [UIColor whiteColor];
+    _titleLabel.shadowColor = [UIColor blackColor];
+    _titleLabel.shadowOffset = CGSizeMake(0, -1);
+    [_textScrollView addSubview:_titleLabel];
+    _titleLabel.text = self.title;
+
+    _messageLabel = [[UILabel alloc] initWithFrame:messageRect];
+    _messageLabel.font = messageFont;
+    _messageLabel.numberOfLines = 0;
+    _messageLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    _messageLabel.textAlignment = NSTextAlignmentCenter;
+    _messageLabel.backgroundColor = [UIColor clearColor];
+    _messageLabel.textColor = [UIColor whiteColor];
+    _messageLabel.shadowColor = [UIColor blackColor];
+    _messageLabel.shadowOffset = CGSizeMake(0, -1);
+    [_textScrollView addSubview:_messageLabel];
+    _messageLabel.text = self.message;
+
     CABasicAnimation *scaleAnimation = [CABasicAnimation animationWithKeyPath:@"transform"];
     scaleAnimation.fromValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(0, 0, 0)];
     scaleAnimation.toValue = [NSValue valueWithCATransform3D:CATransform3DMakeScale(1, 1, 1)];
@@ -110,7 +161,7 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
     backgroundColor.fromValue = (__bridge id)([[UIColor blackColor] colorWithAlphaComponent:0.0].CGColor);
     backgroundColor.toValue = (__bridge id)([[UIColor blackColor] colorWithAlphaComponent:0.5].CGColor);
     self.layer.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5].CGColor;
-    [self.layer addAnimation:backgroundColor forKey:@"color"];    
+    [self.layer addAnimation:backgroundColor forKey:@"color"];
 }
 
 - (void)dismissWithClickedButtonIndex:(NSInteger)buttonIndex animated:(BOOL)animated {
