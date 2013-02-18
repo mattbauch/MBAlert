@@ -322,10 +322,14 @@ static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
         button.titleLabel.font = buttonFont;
         if ([button.titleLabel respondsToSelector:@selector(setMinimumScaleFactor:)]) {
             [button.titleLabel setMinimumScaleFactor:0.5];
+            if ([button.titleLabel respondsToSelector:@selector(setAdjustsLetterSpacingToFitWidth:)]) {
+                [button.titleLabel setAdjustsLetterSpacingToFitWidth:YES];
+            }
         }
         else {
             button.titleLabel.minimumFontSize = buttonFont.pointSize / 2;
         }
+        button.titleLabel.adjustsFontSizeToFitWidth = YES;
         [button addTarget:self action:@selector(alertButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
         [_buttonScrollView addSubview:button];
         
