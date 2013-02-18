@@ -17,6 +17,10 @@
 NSString * const MBAnimationType = @"MBAnimationType";
 NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
 NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
+static NSString * const MBAnimationType = @"MBAnimationType";
+static NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
+static NSString * const MBAlertViewAnimationShow = @"MBAlertViewAnimationShow";
+
 
 @interface MBAlertButton : NSObject
 @property (strong, nonatomic) UIButton *button;
