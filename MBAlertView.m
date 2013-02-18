@@ -24,7 +24,7 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
 
 
 
-@interface MBAlertView ()
+@interface MBAlertView () <UITextFieldDelegate>
 
 @property (strong, nonatomic) UIView *alertView;
 @property (strong, nonatomic) UIScrollView *textScrollView;
@@ -57,6 +57,18 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
         _destructiveButtonIndex = NSNotFound;   // = no button
         
         _buttons = [NSMutableArray arrayWithCapacity:5];
+        
+        
+        // Create UITextFields here because we want to be able to manipulate them from the caller
+        _textField0 = [[UITextField alloc] initWithFrame:CGRectZero];
+        _textField0.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+        _textField0.borderStyle = UITextBorderStyleRoundedRect;
+        _textField0.delegate = self;
+        
+        _textField1 = [[UITextField alloc] initWithFrame:CGRectZero];
+        _textField1.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
+        _textField1.borderStyle = UITextBorderStyleRoundedRect;
+        _textField1.delegate = self;
     }
     return self;
 }
@@ -205,23 +217,21 @@ NSString * const MBAlertViewAnimationDismiss = @"MBAlertViewAnimationDismiss";
     
     if (self.alertStyle != MBAlertViewStyleDefault) {
         CGRect textField0Frame = CGRectMake(edgeInset, textFieldRect.origin.y, usableAlertWidth, 30.0f);
-        _textField0 = [[UITextField alloc] initWithFrame:textField0Frame];
-        _textField0.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
-        _textField0.borderStyle = UITextBorderStyleRoundedRect;
-        _textField0.delegate = self;
+        _textField0.frame = textField0Frame;
         [_alertView addSubview:_textField0];
         if (self.alertStyle == MBAlertViewStyleLoginAndPasswordInput) {
             CGRect textField1Frame = CGRectMake(edgeInset, textFieldRect.origin.y + 30 + edgeInset/2, usableAlertWidth, 30.0f);
-            _textField1 = [[UITextField alloc] initWithFrame:textField1Frame];
-            _textField1.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleWidth;
-            _textField1.borderStyle = UITextBorderStyleRoundedRect;
-            _textField1.delegate = self;
+            _textField1.frame = textField1Frame;
             [_alertView addSubview:_textField1];
         }
+        else {
+            [_textField1 removeFromSuperview];
+        }
     }
-
-    
-    
+    else {
+        [_textField0 removeFromSuperview];
+        [_textField1 removeFromSuperview];
+    }
     
     _buttonScrollView = [[UIScrollView alloc] initWithFrame:buttonsRect];
     _buttonScrollView.contentSize = buttonsRect.size;
